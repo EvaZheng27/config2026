@@ -18,6 +18,7 @@
   .legend{font-size:12px;color:var(--sub);margin-top:8px;line-height:1.8}
   .pill{display:inline-block;font-size:11px;padding:2px 7px;border-radius:20px;margin-right:4px;font-weight:600;white-space:nowrap}
   .p-must{background:var(--must);color:#1a1300}.p-rec{background:var(--rec);color:#001627}.p-th{background:#2c313c;color:#cfd4dd}
+  .p-rsvp{background:#ff5470;color:#fff}
 
   .bar{position:sticky;top:0;z-index:20;background:#0f1115ee;backdrop-filter:blur(8px);
     border-bottom:1px solid var(--line);padding:8px 12px}
@@ -79,7 +80,8 @@
   <span class="tz">⏰ 全部為舊金山時間 (PDT)，現場直接照跑，別換算台灣時間</span>
   <div class="legend">
     <span class="pill p-must">必聽</span><span class="pill p-rec">推薦</span>　點右上 ＋ 加入「我的行程」<br>
-    主題：🎯PM　🤖AI　🧱設計系統　🎨視覺　🔍研究　🛠️實作
+    主題：🎯PM　🤖AI　🧱設計系統　🎨視覺　🔍研究　🛠️實作<br>
+    <span class="pill p-rsvp">📌需預約</span>Learning Lab 要先在 Config app 預約（其他場先到先坐）
   </div>
 </header>
 
@@ -183,6 +185,7 @@ function tagsHTML(d){
   let h='';
   if(d.mark==='must')h+='<span class="pill p-must">必聽</span>';
   else if(d.mark==='rec')h+='<span class="pill p-rec">推薦</span>';
+  if(d.st==='lab')h+='<span class="pill p-rsvp">📌需預約</span>';
   d.th.forEach(t=>{h+='<span class="pill p-th">'+THEMES[t]+'</span>'});
   return h;
 }
