@@ -70,6 +70,15 @@
   .toolbar{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
   .clr{background:transparent;border:1px solid var(--line);color:var(--sub);border-radius:8px;
     padding:5px 10px;font-size:12px;cursor:pointer}
+  .ch-intro{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:11px 13px;font-size:13.5px;color:#d3d7df;margin:4px 0}
+  .ch-intro b{color:#fff}
+  .ch-sec{font-size:13px;font-weight:800;color:var(--accent);border-left:3px solid var(--accent);
+    padding-left:8px;margin:18px 0 8px}
+  .ph{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin-bottom:8px}
+  .ph.hot{border-color:var(--must)}
+  .ph-en{font-size:15px;font-weight:700;margin:0 0 4px;color:#fff}
+  .ph-zh{font-size:12.5px;color:var(--sub);margin:0}
   footer{text-align:center;color:var(--sub);font-size:12px;padding:24px 16px}
 </style>
 </head>
@@ -90,6 +99,7 @@
     <div class="tab on" data-day="d1">6/24 週三</div>
     <div class="tab" data-day="d2">6/25 週四</div>
     <div class="tab" data-day="mine">⭐我的行程<span class="cnt" id="cnt">0</span></div>
+    <div class="tab" data-day="cheat">💬小抄</div>
   </div>
   <div id="filterbox">
     <div class="frow">
@@ -104,6 +114,74 @@
 <div class="day on" id="d1"></div>
 <div class="day" id="d2"></div>
 <div class="day" id="mine"></div>
+
+<div class="day" id="cheat">
+  <div class="ch-intro">😌 攤位的人靠搭話吃飯，他們希望你丟問題讓他們講。<b>你只負責開門，讓對方講。</b> 照念下面就好。</div>
+
+  <div class="ch-sec">🗝️ 萬用 3 句（對任何廠商都能用）</div>
+  <div class="ph">
+    <p class="ph-en">What are you showing at Config this year?</p>
+    <p class="ph-zh">① 開場・讓他講：你們這次來 Config 主打什麼？</p>
+  </div>
+  <div class="ph">
+    <p class="ph-en">I'm a UI designer moving into product / PM in iGaming — how would this help someone like me?</p>
+    <p class="ph-zh">② 拉到自己：我是 UI 設計、正往 PM 走（做 iGaming），這對我這種人有什麼幫助？</p>
+  </div>
+  <div class="ph">
+    <p class="ph-en">What should I check out after the conference? Any promo code?</p>
+    <p class="ph-zh">③ 收尾・帶走價值：結束後我可以去看什麼？有優惠碼嗎？</p>
+  </div>
+
+  <div class="ch-sec">🆘 腦袋全空白時的救命句</div>
+  <div class="ph hot">
+    <p class="ph-en">What's the one thing you'd want me to remember about you?</p>
+    <p class="ph-zh">你最希望我記得你們哪一點？（把球完全踢回去）</p>
+  </div>
+  <div class="ph hot">
+    <p class="ph-en">Oh interesting — why is that? / How does that compare to…?</p>
+    <p class="ph-zh">接話神器：喔有意思，為什麼？／ 那跟○○比起來呢？（再撐 2 分鐘）</p>
+  </div>
+
+  <div class="ch-sec">🐙 GitHub AI 團隊（Copilot / AI agents）</div>
+  <div class="ph">
+    <p class="ph-en">How are designers, not just devs, using Copilot now?</p>
+    <p class="ph-zh">現在設計師（不只工程師）怎麼用 Copilot？</p>
+  </div>
+  <div class="ph">
+    <p class="ph-en">What can the new Copilot agents do end-to-end today?</p>
+    <p class="ph-zh">現在 AI agent 能一條龍做到哪？</p>
+  </div>
+  <div class="ph">
+    <p class="ph-en">How do PMs at GitHub use Copilot day to day?</p>
+    <p class="ph-zh">（PM 視角）GitHub 的 PM 平常怎麼用 Copilot？</p>
+  </div>
+  <div class="ph">
+    <p class="ph-en">If I'm not an engineer, what's the easiest way to start getting value from Copilot?</p>
+    <p class="ph-zh">不是工程師的話，最簡單的入門用法是什麼？</p>
+  </div>
+
+  <div class="ch-sec">‹div›RIOTS（html.to.design 等工具）</div>
+  <div class="ph">
+    <p class="ph-en">Do you have a Config promo code or free Pro trial for html.to.design?</p>
+    <p class="ph-zh">html.to.design 有 Config 限定優惠碼／免費 Pro 試用嗎？</p>
+  </div>
+  <div class="ph">
+    <p class="ph-en">Can you run html.to.design on this site and show me the editable result?</p>
+    <p class="ph-zh">能不能用這個網站當場跑一次，看變成可編輯 Figma 的結果？</p>
+  </div>
+  <div class="ph">
+    <p class="ph-en">How do teams keep Figma and code in sync with Backlight / story.to.design?</p>
+    <p class="ph-zh">（設計系統/PM）團隊怎麼讓 Figma 跟程式碼不脫節？</p>
+  </div>
+
+  <div class="ch-sec">👋 禮貌結束、隨時可走</div>
+  <div class="ph">
+    <p class="ph-en">This was great, I'll check it out — thank you!</p>
+    <p class="ph-zh">聊得很開心，我會去看看，謝謝！（講完就能走，完全 OK）</p>
+  </div>
+
+  <div class="ch-intro" style="margin-top:14px">🧠 心法：<b>你問問題＝你掌握節奏</b>，不用想「我要講什麼厲害的」。讓對方講，你點頭追問就夠了。</div>
+</div>
 
 <footer>為 Eva 整理 · Config 2026 · 時間/場館以現場 Figma app 為準</footer>
 
@@ -287,7 +365,7 @@ const tabs=document.querySelectorAll('.tab'),days=document.querySelectorAll('.da
 tabs.forEach(t=>t.onclick=function(){
   tabs.forEach(x=>x.classList.remove('on'));days.forEach(x=>x.classList.remove('on'));
   t.classList.add('on');document.getElementById(t.dataset.day).classList.add('on');
-  document.getElementById('filterbox').style.display=(t.dataset.day==='mine')?'none':'';
+  document.getElementById('filterbox').style.display=(t.dataset.day==='mine'||t.dataset.day==='cheat')?'none':'';
   window.scrollTo(0,0);
 });
 document.querySelectorAll('.flt').forEach(f=>f.onclick=function(){
