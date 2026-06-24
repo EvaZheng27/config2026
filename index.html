@@ -5,71 +5,81 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Config 2026 · Eva 的議程</title>
 <style>
-  :root{
-    --bg:#0f1115; --card:#1a1d24; --card2:#21252e; --line:#2c313c;
-    --txt:#e8eaed; --sub:#9aa0ab; --accent:#7c5cff; --must:#ffb020; --rec:#3da5ff;
-  }
+  :root{--bg:#0f1115;--card:#1a1d24;--card2:#21252e;--line:#2c313c;
+    --txt:#e8eaed;--sub:#9aa0ab;--accent:#7c5cff;--must:#ffb020;--rec:#3da5ff;--warn:#ff5470;}
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   body{margin:0;background:var(--bg);color:var(--txt);
-    font-family:-apple-system,"PingFang TC","Helvetica Neue",sans-serif;
-    line-height:1.55;padding-bottom:60px}
-  header{padding:18px 16px 10px;background:linear-gradient(135deg,#7c5cff22,#0f1115)}
-  h1{font-size:20px;margin:0 0 4px}
+    font-family:-apple-system,"PingFang TC","Helvetica Neue",sans-serif;line-height:1.55;padding-bottom:50px}
+  header{padding:16px 16px 8px;background:linear-gradient(135deg,#7c5cff22,#0f1115)}
+  h1{font-size:19px;margin:0 0 3px}
   .sub{color:var(--sub);font-size:13px;margin:0}
-  .tz{background:#7c5cff1f;border:1px solid #7c5cff44;color:#cbbcff;
-    font-size:12px;padding:6px 10px;border-radius:10px;margin-top:10px;display:block}
+  .tz{background:#7c5cff1f;border:1px solid #7c5cff44;color:#cbbcff;font-size:12px;
+    padding:6px 10px;border-radius:10px;margin-top:9px;display:block}
   .legend{font-size:12px;color:var(--sub);margin-top:8px;line-height:1.8}
-  .pill{display:inline-block;font-size:11px;padding:2px 7px;border-radius:20px;
-    margin-right:4px;font-weight:600;white-space:nowrap}
-  .p-must{background:var(--must);color:#1a1300}
-  .p-rec{background:var(--rec);color:#001627}
-  .p-th{background:#2c313c;color:#cfd4dd}
+  .pill{display:inline-block;font-size:11px;padding:2px 7px;border-radius:20px;margin-right:4px;font-weight:600;white-space:nowrap}
+  .p-must{background:var(--must);color:#1a1300}.p-rec{background:var(--rec);color:#001627}.p-th{background:#2c313c;color:#cfd4dd}
 
-  /* sticky controls */
-  .bar{position:sticky;top:0;z-index:20;background:#0f1115ee;
-    backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:8px 12px}
+  .bar{position:sticky;top:0;z-index:20;background:#0f1115ee;backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);padding:8px 12px}
   .tabs{display:flex;gap:8px;margin-bottom:8px}
-  .tab{flex:1;text-align:center;padding:9px;border-radius:12px;background:var(--card);
-    color:var(--sub);font-weight:700;font-size:14px;border:1px solid var(--line);cursor:pointer}
+  .tab{flex:1;text-align:center;padding:9px 4px;border-radius:12px;background:var(--card);
+    color:var(--sub);font-weight:700;font-size:13.5px;border:1px solid var(--line);cursor:pointer}
   .tab.on{background:var(--accent);color:#fff;border-color:var(--accent)}
-  .filters{display:flex;gap:6px}
+  .cnt{display:inline-block;min-width:18px;padding:0 5px;background:var(--must);color:#1a1300;
+    border-radius:20px;font-size:11px;margin-left:3px}
+  .frow{display:flex;gap:6px;margin-bottom:6px}
+  .frow.themes{flex-wrap:wrap}
   .flt{flex:1;text-align:center;padding:7px;border-radius:10px;background:var(--card);
     color:var(--sub);font-size:12.5px;border:1px solid var(--line);cursor:pointer}
   .flt.on{background:#fff;color:#111;font-weight:700}
+  .chip{padding:5px 9px;border-radius:20px;background:var(--card);color:var(--sub);
+    font-size:12px;border:1px solid var(--line);cursor:pointer}
+  .chip.on{background:var(--accent);color:#fff;border-color:var(--accent)}
 
-  .day{display:none;padding:8px 12px 40px}
-  .day.on{display:block}
-
-  .slot{margin-top:18px}
-  .slot-h{font-size:13px;font-weight:800;color:var(--accent);
-    border-left:3px solid var(--accent);padding-left:8px;margin-bottom:8px;
-    position:sticky;top:96px;background:#0f1115;padding-top:4px;padding-bottom:4px;z-index:5}
+  .day{display:none;padding:8px 12px 40px}.day.on{display:block}
+  .slot{margin-top:16px}
+  .slot-h{font-size:13px;font-weight:800;color:var(--accent);border-left:3px solid var(--accent);
+    padding-left:8px;margin-bottom:8px}
   .multi{color:var(--must);font-weight:700;font-size:11px;margin-left:6px}
 
-  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+  .card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:14px;
     padding:12px 13px;margin-bottom:9px;border-left:4px solid var(--line)}
-  .card.must{border-left-color:var(--must)}
-  .card.rec{border-left-color:var(--rec)}
-  .ttl{font-size:15px;font-weight:700;margin:0 0 2px}
+  .card.must{border-left-color:var(--must)}.card.rec{border-left-color:var(--rec)}
+  .card.conf{border-color:var(--warn);box-shadow:0 0 0 1px var(--warn)}
+  .ttl{font-size:15px;font-weight:700;margin:0 28px 2px 0}
   .en{font-size:11.5px;color:var(--sub);margin:0 0 6px}
-  .meta{font-size:12px;color:var(--sub);margin:0 0 7px}
-  .stage{display:inline-block;background:var(--card2);border:1px solid var(--line);
-    border-radius:6px;padding:1px 6px;font-size:11px;margin-right:6px;color:#cfd4dd}
+  .meta{font-size:12px;color:var(--sub);margin:0 0 4px}
+  .venue{display:inline-block;background:var(--card2);border:1px solid var(--line);border-radius:6px;
+    padding:2px 7px;font-size:11.5px;margin:2px 0;color:#d8dde6}
   .desc{font-size:13.5px;color:#d3d7df;margin:6px 0 0}
   .tags{margin-bottom:6px}
+  .add{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;
+    border:1px solid var(--line);background:var(--card2);color:var(--sub);font-size:17px;
+    cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center}
+  .add.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .rm{margin-top:8px;background:transparent;border:1px solid var(--warn);color:var(--warn);
+    border-radius:8px;padding:5px 10px;font-size:12px;cursor:pointer}
   .hidden{display:none}
+  .banner{background:#ff547022;border:1px solid var(--warn);color:#ffb3c1;border-radius:12px;
+    padding:11px 13px;font-size:13px;margin:6px 0 4px}
+  .banner b{color:#fff}
+  .empty{text-align:center;color:var(--sub);font-size:14px;padding:50px 20px;line-height:1.9}
+  .daylbl{font-size:13px;font-weight:800;color:#fff;margin:18px 0 8px;
+    background:var(--card2);border-radius:8px;padding:6px 10px}
+  .toolbar{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+  .clr{background:transparent;border:1px solid var(--line);color:var(--sub);border-radius:8px;
+    padding:5px 10px;font-size:12px;cursor:pointer}
   footer{text-align:center;color:var(--sub);font-size:12px;padding:24px 16px}
 </style>
 </head>
 <body>
 <header>
   <h1>Config 2026 · Eva 的個人化議程</h1>
-  <p class="sub">為「UI 設計 → PM ・ AI 提效・視覺強項」量身排</p>
+  <p class="sub">UI 設計 → PM ・ AI 提效・視覺強項</p>
   <span class="tz">⏰ 全部為舊金山時間 (PDT)，現場直接照跑，別換算台灣時間</span>
   <div class="legend">
-    <span class="pill p-must">必聽</span>不容錯過　<span class="pill p-rec">推薦</span>很適合你<br>
-    主題：🎯PM/產品　🤖AI提效　🧱設計系統　🎨視覺/靈感　🔍研究/UX　🛠️Figma實作<br>
-    📍場館：Main＝Hall ABC（展館層）｜Maker＋Learning Labs＝Hall F（展館層）｜Level 2＝二樓｜Mezzanine＝夾層
+    <span class="pill p-must">必聽</span><span class="pill p-rec">推薦</span>　點右上 ＋ 加入「我的行程」<br>
+    主題：🎯PM　🤖AI　🧱設計系統　🎨視覺　🔍研究　🛠️實作
   </div>
 </header>
 
@@ -77,433 +87,213 @@
   <div class="tabs">
     <div class="tab on" data-day="d1">6/24 週三</div>
     <div class="tab" data-day="d2">6/25 週四</div>
+    <div class="tab" data-day="mine">⭐我的行程<span class="cnt" id="cnt">0</span></div>
   </div>
-  <div class="filters">
-    <div class="flt on" data-f="all">全部</div>
-    <div class="flt" data-f="must">只看必聽</div>
-    <div class="flt" data-f="rec">必聽＋推薦</div>
-  </div>
-</div>
-
-<!-- ================= DAY 1 ================= -->
-<div class="day on" id="d1">
-
-<div class="slot"><div class="slot-h">9:00 – 10:20</div>
-  <div class="card must" data-m="must">
-    <p class="ttl">開幕主題演講：Figma 產品發表</p>
-    <p class="en">Opening Keynote: Figma product launch</p>
-    <div class="tags"><span class="pill p-must">必聽</span></div>
-    <p class="meta"><span class="stage">📍Main · Hall ABC（展館層）</span>Dylan Field（Figma 共同創辦人 / CEO）</p>
-    <p class="desc">全年最大場。Figma 一次公布今年所有新產品與 AI 功能，後面幾乎每一場都建立在這上面，先聽才接得上。</p>
+  <div id="filterbox">
+    <div class="frow">
+      <div class="flt on" data-f="all">全部</div>
+      <div class="flt" data-f="must">只看必聽</div>
+      <div class="flt" data-f="rec">必聽＋推薦</div>
+    </div>
+    <div class="frow themes" id="themechips"></div>
   </div>
 </div>
 
-<div class="slot"><div class="slot-h">10:35 – 10:55</div>
-  <div class="card rec" data-m="rec">
-    <p class="ttl">規則即藝術：與 AI 共創</p>
-    <p class="en">The rules are the art: creating with AI</p>
-    <div class="tags"><span class="pill p-rec">推薦</span><span class="pill p-th">🤖</span><span class="pill p-th">🎨</span></div>
-    <p class="meta"><span class="stage">📍Main · Hall ABC（展館層）</span>Holly Herndon（音樂藝術家）</p>
-    <p class="desc">藝術家談怎麼把 AI 當創作素材、規則本身就是藝術，啟發你「跟 AI 共創、而不是被取代」的心態。</p>
-  </div>
-</div>
+<div class="day on" id="d1"></div>
+<div class="day" id="d2"></div>
+<div class="day" id="mine"></div>
 
-<div class="slot"><div class="slot-h">11:00 – 12:10<span class="multi">⚖️ 同時段 4 場</span></div>
-  <div class="card rec" data-m="rec">
-    <p class="ttl">Figma Deep Dive（新功能實作）</p>
-    <p class="en">Figma deep dive · 11:10–12:10</p>
-    <div class="tags"><span class="pill p-rec">推薦</span><span class="pill p-th">🛠️</span></div>
-    <p class="meta"><span class="stage">📍Main · Hall ABC（展館層）</span>Daniela Muntyan 等（Figma）</p>
-    <p class="desc">開幕新功能的深入動手演示，最接近 workshop，看完馬上會用。</p>
-  </div>
-  <div class="card rec" data-m="rec">
-    <p class="ttl">Learning Lab：設計到開發的工作流</p>
-    <p class="en">Figma learning lab: design to development workflows · 11:00–11:45</p>
-    <div class="tags"><span class="pill p-rec">推薦</span><span class="pill p-th">🤖</span><span class="pill p-th">🛠️</span></div>
-    <p class="meta"><span class="stage">📍Learning Labs · Hall F（展館層）</span>Amy Lima・Riccardo Erra（Figma）</p>
-    <p class="desc">動手場，教設計如何順暢交付給工程——PM 必懂的協作環節。</p>
-  </div>
-  <div class="card" data-m="none">
-    <p class="ttl">Ready for the world</p>
-    <p class="en">11:10–11:30</p>
-    <div class="tags"><span class="pill p-th">🎨</span></div>
-    <p class="meta"><span class="stage">📍Mezzanine · 夾層</span>Vicki Tan（設計師 / 作家）</p>
-    <p class="desc">設計師兼作家談如何讓作品「準備好面對世界」，偏心態與敘事。</p>
-  </div>
-  <div class="card" data-m="none">
-    <p class="ttl">從啟動到畫布：串接 Google Workspace 與 Figma</p>
-    <p class="en">From kickoff to canvas · 11:10–11:30</p>
-    <div class="tags"><span class="pill p-th">🤖</span></div>
-    <p class="meta"><span class="stage">📍Maker · Hall F（展館層）</span>Google</p>
-    <p class="desc">怎麼把 Google Workspace 跟 Figma 串起來，從專案啟動到畫布的流程。</p>
-  </div>
-</div>
-
-<div class="slot"><div class="slot-h">11:50 – 12:10<span class="multi">⚖️ 同時段 3 場</span></div>
-  <div class="card rec" data-m="rec">
-    <p class="ttl">如何為 AI 產品打造內容系統</p>
-    <p class="en">How to build content systems for AI product workflows</p>
-    <div class="tags"><span class="pill p-rec">推薦</span><span class="pill p-th">🤖</span><span class="pill p-th">🎯</span></div>
-    <p class="meta"><span class="stage">📍Maker · Hall F（展館層）</span>Ditto 共同創辦人</p>
-    <p class="desc">怎麼為 AI 產品建立結構化的「內容系統」（文案/資料），PM 視角很有用。</p>
-  </div>
-  <div class="card" data-m="none">
-    <p class="ttl">Figma 遇上硬體：為實體世界做原型</p>
-    <p class="en">Figma meets hardware</p>
-    <div class="tags"><span class="pill p-th">🧱</span></div>
-    <p class="meta"><span class="stage">📍Level 2 · 二樓</span>Electrolux</p>
-    <p class="desc">家電團隊示範用 Figma 為實體產品做原型。</p>
-  </div>
-  <div class="card" data-m="none">
-    <p class="ttl">刻意不同步：行動勝出後的桌面設計</p>
-    <p class="en">Out of sync, on purpose</p>
-    <div class="tags"><span class="pill p-th">🎨</span></div>
-    <p class="meta"><span class="stage">📍Mezzanine · 夾層</span>Spotify</p>
-    <p class="desc">在「行動優先」時代，反而刻意回頭把桌面設計做好的思考。</p>
-  </div>
-</div>
-
-<div class="slot"><div class="slot-h">12:00 – 12:45</div>
-  <div class="card rec" data-m="rec">
-    <p class="ttl">Learning Lab：用 Figma Make 的各種玩法</p>
-    <p class="en">Figma learning lab: the many ways to make with Figma Make</p>
-    <div class="tags"><span class="pill p-rec">推薦</span><span class="pill p-th">🤖</span><span class="pill p-th">🛠️</span></div>
-    <p class="meta"><span class="stage">📍Learning Labs · Hall F（展館層）</span>Figma</p>
-    <p class="desc">動手場，帶你玩 Figma Make（用 AI/prompt 直接生成可用設計），AI 提效核心工具。<br><b>⚠️ 與下午 PM 連發衝堂</b>——保 PM、這場看線上。</p>
-  </div>
-</div>
-
-<div class="slot"><div class="slot-h">12:30 – 12:50<span class="multi">⚖️ 同時段 2 場</span></div>
-  <div class="card rec" data-m="rec">
-    <p class="ttl">當導演：舞台工藝如何啟發產品工藝</p>
-    <p class="en">Be the director: how stage craft informs product craft</p>
-    <div class="tags"><span class="pill p-rec">推薦</span><span class="pill p-th">🎯</span></div>
-    <p class="meta"><span class="stage">📍Level 2 · 二樓</span>Kim Beverett（OpenAI 產品經理）</p>
-    <p class="desc">OpenAI PM 用「導演 / 舞台」比喻產品打磨，怎麼指揮一個產品的節奏與細節。</p>
-  </div>
-  <div class="card" data-m="none">
-    <p class="ttl">用 Dscout AI 從概念走到有信心</p>
-    <p class="en">From concept to confidence with Dscout AI</p>
-    <div class="tags"><span class="pill p-th">🔍</span><span class="pill p-th">🤖</span></div>
-    <p class="meta"><span class="stage">📍Maker · Hall F（展館層）</span>Dscout</p>
-    <p class="desc">用 Dscout AI 做使用者研究，從概念到有信心上線。</p>
-  </div>
-</div>
-
-<div class="slot"><div class="slot-h">12:50 – 1:15<span class="multi">⚖️ 同時段 2 場</span></div>
-  <div class="card must" data-m="must">
-    <p class="ttl">Skill issue：我們如何為 PM 打造一套「作業系統」</p>
-    <p class="en">Skill issue: how we built an OS for PMs at Figma · 12:50–1:10</p>
-    <div class="tags"><span class="pill p-must">必聽</span><span class="pill p-th">🎯</span><span class="pill p-th">🤖</span></div>
-    <p class="meta"><span class="stage">📍Level 2 · 二樓</span>Jinen Kamdar・Lawrence Luk（Figma）</p>
-    <p class="desc">Figma 內部怎麼幫 PM 建一套流程＋AI 工具的「作業系統」——你轉 PM 最直接的範本。接在上一場同廳，不用移動。</p>
-  </div>
-  <div class="card" data-m="none">
-    <p class="ttl">設計什麼都能做的產品</p>
-    <p class="en">Designing the product that can do anything · 12:55–1:15</p>
-    <div class="tags"><span class="pill p-th">🎯</span></div>
-    <p class="meta"><span class="stage">📍Mezzanine · 夾層</span>Brian Ringley（Boston Dynamics）</p>
-    <p class="desc">波士頓動力的 PM 談怎麼設計「什麼都能做」的機器人產品。</p>
-  </div>
-</div>
-
-<div class="slot"><div class="slot-h">1:10 – 1:40</div>
-  <div class="card rec" data-m="rec">
-    <p class="ttl">Figma Deep Dive（含 AI Agents 產品負責人）</p>
-    <p class="en">Figma deep dive</p>
-    <div class="tags"><span class="pill p-rec">推薦</span><span class="pill p-th">🤖</span><span class="pill p-th">🛠️</span></div>
-    <p class="meta"><span class="stage">📍Main · Hall ABC（展館層）</span>Tammy Taabassum・Rodrigo Davies（Figma）</p>
-    <p class="desc">含 Figma AI Agents 的產品負責人，看 AI agent 怎麼真正進到設計流程。</p>
-  </div>
-</div>
-
-<div class="slot"><div class="slot-h">1:50 – 2:45<span class="multi">⚖️ 想動手 vs 想聽方法，二選一</span></div>
-  <div class="card rec" data-m="rec">
-    <p class="ttl">把 AI 規模化導入創意作業</p>
-    <p class="en">Hacking AI for creative operations at scale · 1:50–2:10</p>
-    <div class="tags"><span class="pill p-rec">推薦</span><span class="pill p-th">🤖</span></div>
-    <p class="meta"><span class="stage">📍Maker · Hall F（展館層）</span>Rory Flynn（Systematiq AI）</p>
-    <p class="desc">怎麼把 AI 規模化導入創意/設計的日常作業，提效實戰。</p>
-  </div>
-  <div class="card rec" data-m="rec">
-    <p class="ttl">Learning Lab：用 AI 解鎖速度與視覺表達</p>
-    <p class="en">Unlocking speed and visual expression · 2:00–2:45</p>
-    <div class="tags"><span class="pill p-rec">推薦</span><span class="pill p-th">🎨</span><span class="pill p-th">🤖</span><span class="pill p-th">🛠️</span></div>
-    <p class="meta"><span class="stage">📍Learning Labs · Hall F（展館層）</span>Hugo Raymond・Mallory Dean（Figma）</p>
-    <p class="desc">動手場，用 AI 提升速度＋視覺表現力，正中你的視覺強項。（想動手就選這場，會跟左右兩場衝）</p>
-  </div>
-</div>
-
-<div class="slot"><div class="slot-h">2:30 – 2:55<span class="multi">⚖️ 同時段 2 場</span></div>
-  <div class="card rec" data-m="rec">
-    <p class="ttl">結構化思考如何給你的 AI 超能力</p>
-    <p class="en">How structured thinking gives your AI superpowers · 2:30–2:50</p>
-    <div class="tags"><span class="pill p-rec">推薦</span><span class="pill p-th">🤖</span><span class="pill p-th">🎯</span></div>
-    <p class="meta"><span class="stage">📍Maker · Hall F（展館層）</span>Carla Pescio Canale（Atlassian 設計 AI 負責人）</p>
-    <p class="desc">怎麼用「結構化思考」讓你指揮 AI 更強，AI＋PM 思維。</p>
-  </div>
-  <div class="card" data-m="none">
-    <p class="ttl">後設認知設計迴圈</p>
-    <p class="en">The metacognitive design loop · 2:35–2:55</p>
-    <div class="tags"><span class="pill p-th">🧱</span><span class="pill p-th">🤖</span></div>
-    <p class="meta"><span class="stage">📍Level 2 · 二樓</span>Epsilon</p>
-    <p class="desc">用「後設認知」設計迴圈，結合設計系統與 AI。</p>
-  </div>
-</div>
-
-<div class="slot"><div class="slot-h">2:55 – 3:15</div>
-  <div class="card rec" data-m="rec">
-    <p class="ttl">你的最佳實踐都鎖在腦裡——AI 根本不知道</p>
-    <p class="en">Your best practices are trapped in your head—and your AI has no idea</p>
-    <div class="tags"><span class="pill p-rec">推薦</span><span class="pill p-th">🤖</span><span class="pill p-th">🎯</span></div>
-    <p class="meta"><span class="stage">📍Level 2 · 二樓</span>Harald Kirschner（Microsoft 首席 PM）</p>
-    <p class="desc">怎麼把你腦中的隱性經驗變成 AI 能用的東西，PM＋AI 提效。</p>
-  </div>
-</div>
-
-<div class="slot"><div class="slot-h">4:00 – 5:00</div>
-  <div class="card must" data-m="must">
-    <p class="ttl">閉幕主題演講</p>
-    <p class="en">Closing Keynote</p>
-    <div class="tags"><span class="pill p-must">必聽</span></div>
-    <p class="meta"><span class="stage">📍Main · Hall ABC（展館層）</span>Patrick Flaherty（Microsoft）＋ Tommy Geoco・Catt Small 等</p>
-    <p class="desc">雙講：把真實世界的動態變成設計（動效）＋「2026 年做產品是什麼感覺」名人對談，收尾必聽。</p>
-  </div>
-</div>
-
-</div>
-
-<!-- ================= DAY 2 ================= -->
-<div class="day" id="d2">
-
-<div class="slot"><div class="slot-h">10:15 – 10:40<span class="multi">⚖️ 同時段 3 場</span></div>
-  <div class="card rec" data-m="rec">
-    <p class="ttl">Figma Deep Dive</p>
-    <p class="en">Figma deep dive · 10:15–10:35</p>
-    <div class="tags"><span class="pill p-rec">推薦</span><span class="pill p-th">🛠️</span></div>
-    <p class="meta"><span class="stage">📍Main · Hall ABC（展館層）</span>Elle Sheer 等（Figma）</p>
-    <p class="desc">第二天的新功能深入演示。</p>
-  </div>
-  <div class="card rec" data-m="rec">
-    <p class="ttl">在「10 倍工程師」時代做設計</p>
-    <p class="en">Designing in the age of the 10x engineer · 10:15–10:35</p>
-    <div class="tags"><span class="pill p-rec">推薦</span><span class="pill p-th">🤖</span><span class="pill p-th">🎯</span></div>
-    <p class="meta"><span class="stage">📍Maker · Hall F（展館層）</span>Andy Zhang（Google 設計工程主管）</p>
-    <p class="desc">當工程師被 AI 放大 10 倍，設計師怎麼自處與提效。</p>
-  </div>
-  <div class="card" data-m="none">
-    <p class="ttl">十年每日速寫</p>
-    <p class="en">10 years of daily sketching · 10:20–10:40</p>
-    <div class="tags"><span class="pill p-th">🎨</span></div>
-    <p class="meta"><span class="stage">📍Mezzanine · 夾層</span>Zach Lieberman（MIT Media Lab）</p>
-    <p class="desc">藝術家分享十年每日速寫的創作堅持，純視覺靈感。</p>
-  </div>
-</div>
-
-<div class="slot"><div class="slot-h">10:30 – 10:50</div>
-  <div class="card" data-m="none">
-    <p class="ttl">介面裡看不見的機制</p>
-    <p class="en">The invisible mechanisms in your interfaces</p>
-    <div class="tags"><span class="pill p-th">🎨</span><span class="pill p-th">🔍</span></div>
-    <p class="meta"><span class="stage">📍Level 2 · 二樓</span>Johannes Mutter</p>
-    <p class="desc">介面裡那些看不見、但決定體驗好壞的互動細節（UX craft）。</p>
-  </div>
-</div>
-
-<div class="slot"><div class="slot-h">10:50 – 11:10<span class="multi">⚖️ 同時段 2 場</span></div>
-  <div class="card rec" data-m="rec">
-    <p class="ttl">用設計駕馭高密度</p>
-    <p class="en">Dense by design</p>
-    <div class="tags"><span class="pill p-rec">推薦</span><span class="pill p-th">🎨</span></div>
-    <p class="meta"><span class="stage">📍Level 2 · 二樓</span>Matthew Ström-Awn（mu.design）</p>
-    <p class="desc">怎麼設計「資訊密度很高」卻仍清楚好用的介面——對 iGaming 這種高密度 UI 特別有用。</p>
-  </div>
-  <div class="card" data-m="none">
-    <p class="ttl">把即時使用者洞察整進設計流程</p>
-    <p class="en">Building real-time user insights into your workflow</p>
-    <div class="tags"><span class="pill p-th">🔍</span></div>
-    <p class="meta"><span class="stage">📍Maker · Hall F（展館層）</span>HeyMarvin</p>
-    <p class="desc">把即時的使用者研究洞察接進日常設計流程。</p>
-  </div>
-</div>
-
-<div class="slot"><div class="slot-h">11:10 – 11:45<span class="multi">⚖️ 同時段 2 場</span></div>
-  <div class="card" data-m="none">
-    <p class="ttl">Instagram 的使用者名稱：一個小修正如何變成身份危機</p>
-    <p class="en">Usernames on Instagram · 11:10–11:30</p>
-    <div class="tags"><span class="pill p-th">🎨</span></div>
-    <p class="meta"><span class="stage">📍Level 2 · 二樓</span>Rose McManus（Instagram / Meta 內容設計）</p>
-    <p class="desc">一個小小的文案/設計修正，怎麼演變成身份認同議題的內容設計案例。</p>
-  </div>
-  <div class="card rec" data-m="rec">
-    <p class="ttl">AI 會顛覆你的流程——而且變更好</p>
-    <p class="en">AI will upend your process—for the better · 11:25–11:45</p>
-    <div class="tags"><span class="pill p-rec">推薦</span><span class="pill p-th">🤖</span></div>
-    <p class="meta"><span class="stage">📍Maker · Hall F（展館層）</span>Justin Meyer（Bitovi）</p>
-    <p class="desc">AI 會打掉重練你的工作流程，但結果是變好——務實觀點。</p>
-  </div>
-</div>
-
-<div class="slot"><div class="slot-h">11:30 – 12:15</div>
-  <div class="card rec" data-m="rec">
-    <p class="ttl">Learning Lab：用 Figma Draw 表達自己</p>
-    <p class="en">Figma learning lab: express yourself with Figma Draw</p>
-    <div class="tags"><span class="pill p-rec">推薦</span><span class="pill p-th">🎨</span><span class="pill p-th">🛠️</span></div>
-    <p class="meta"><span class="stage">📍Learning Labs · Hall F（展館層）</span>Figma</p>
-    <p class="desc">動手場，用 Figma Draw 自由創作，發揮你的視覺強項。</p>
-  </div>
-</div>
-
-<div class="slot"><div class="slot-h">12:15 – 1:00<span class="multi">⚖️ 同時段 2 場</span></div>
-  <div class="card rec" data-m="rec">
-    <p class="ttl">Figma Deep Dive：Weave 工作流揭密</p>
-    <p class="en">Figma deep dive: inside the Weave workflow</p>
-    <div class="tags"><span class="pill p-rec">推薦</span><span class="pill p-th">🤖</span><span class="pill p-th">🛠️</span></div>
-    <p class="meta"><span class="stage">📍Main · Hall ABC（展館層）</span>Gal Shaviv・Ron Baranov（Figma）</p>
-    <p class="desc">深入 Weave（Figma 的 AI 工作流），AI 提效重點。</p>
-  </div>
-  <div class="card rec" data-m="rec">
-    <p class="ttl">現代電影裡的介面設計工藝</p>
-    <p class="en">The hidden craft of interface design in modern film · 12:25–12:45</p>
-    <div class="tags"><span class="pill p-rec">推薦</span><span class="pill p-th">🎨</span></div>
-    <p class="meta"><span class="stage">📍Mezzanine · 夾層</span>Jayse Hansen</p>
-    <p class="desc">好萊塢科幻電影裡那些炫炮介面怎麼設計的，純視覺享受＋靈感。</p>
-  </div>
-</div>
-
-<div class="slot"><div class="slot-h">1:10 – 1:40<span class="multi">⚖️ 同時段 2 場</span></div>
-  <div class="card rec" data-m="rec">
-    <p class="ttl">為 AI 時代準備好 Rocket</p>
-    <p class="en">Preparing Rocket for the AI era · 1:10–1:30</p>
-    <div class="tags"><span class="pill p-rec">推薦</span><span class="pill p-th">🧱</span><span class="pill p-th">🤖</span></div>
-    <p class="meta"><span class="stage">📍Level 2 · 二樓</span>Rocket</p>
-    <p class="desc">金融品牌怎麼把設計系統整理成 AI 時代可用（設計系統 × AI）。</p>
-  </div>
-  <div class="card rec" data-m="rec">
-    <p class="ttl">在 AI 世界裡有信心地設計</p>
-    <p class="en">Designing with confidence in an AI-powered world · 1:20–1:40</p>
-    <div class="tags"><span class="pill p-rec">推薦</span><span class="pill p-th">🔍</span><span class="pill p-th">🤖</span></div>
-    <p class="meta"><span class="stage">📍Maker · Hall F（展館層）</span>UserTesting</p>
-    <p class="desc">在 AI 世界裡靠研究做出有信心的設計決策。</p>
-  </div>
-</div>
-
-<div class="slot"><div class="slot-h">1:30 – 1:50</div>
-  <div class="card must" data-m="must">
-    <p class="ttl">為「被讀懂」而設計：做出 AI 真的能用的設計系統</p>
-    <p class="en">Designed to be read: making a system AI can actually use</p>
-    <div class="tags"><span class="pill p-must">必聽</span><span class="pill p-th">🧱</span><span class="pill p-th">🤖</span></div>
-    <p class="meta"><span class="stage">📍Level 2 · 二樓</span>Harvey Whiting（Meta 產品設計師）</p>
-    <p class="desc">怎麼做出「AI 真的讀得懂」的設計系統——把你的視覺強項接上 AI 的關鍵橋樑。</p>
-  </div>
-</div>
-
-<div class="slot"><div class="slot-h">2:00 – 2:45<span class="multi">⚖️ 想動手 vs 想聽案例</span></div>
-  <div class="card rec" data-m="rec">
-    <p class="ttl">Learning Lab：打造你的第一個 Weave 工作流</p>
-    <p class="en">Build your first Weave workflow · 2:00–3:00</p>
-    <div class="tags"><span class="pill p-rec">推薦</span><span class="pill p-th">🤖</span><span class="pill p-th">🛠️</span></div>
-    <p class="meta"><span class="stage">📍Learning Labs · Hall F（展館層）</span>Moran Dankner・Ken Vreman（Figma）</p>
-    <p class="desc">動手場，親手建你第一個 Weave（AI 工作流），最實用的 AI 提效實作。</p>
-  </div>
-  <div class="card rec" data-m="rec">
-    <p class="ttl">掌握迴圈：設計師與研究員如何用 AI evals 取勝</p>
-    <p class="en">Own the loop: how designers and researchers win with AI evals · 2:05–2:25</p>
-    <div class="tags"><span class="pill p-rec">推薦</span><span class="pill p-th">🔍</span><span class="pill p-th">🤖</span></div>
-    <p class="meta"><span class="stage">📍Mezzanine · 夾層</span>Setor Zilevu（Figma 研究員）</p>
-    <p class="desc">設計師/研究員怎麼用「AI 評測（evals）」掌握主導權。</p>
-  </div>
-  <div class="card rec" data-m="rec">
-    <p class="ttl">為未來的 app 設計</p>
-    <p class="en">Design for the future of apps · 2:25–2:45</p>
-    <div class="tags"><span class="pill p-rec">推薦</span><span class="pill p-th">🤖</span></div>
-    <p class="meta"><span class="stage">📍Mezzanine · 夾層</span>Craig Labenz（Google）</p>
-    <p class="desc">為「未來的 app」設計，AI / UX / 開發的交界。</p>
-  </div>
-</div>
-
-<div class="slot"><div class="slot-h">2:55 – 3:25<span class="multi">⚖️ 同時段 2 場</span></div>
-  <div class="card rec" data-m="rec">
-    <p class="ttl">設計系統無政府主義</p>
-    <p class="en">Design systems anarchy · 2:55–3:15</p>
-    <div class="tags"><span class="pill p-rec">推薦</span><span class="pill p-th">🧱</span><span class="pill p-th">🤖</span></div>
-    <p class="meta"><span class="stage">📍Level 2 · 二樓</span>Lauren LoPrete（Mercury 設計基礎負責人）</p>
-    <p class="desc">打破設計系統的死板規則，AI 時代的設計系統新解。</p>
-  </div>
-  <div class="card rec" data-m="rec">
-    <p class="ttl">為可讀性而設計</p>
-    <p class="en">Legibility by design · 3:05–3:25</p>
-    <div class="tags"><span class="pill p-rec">推薦</span><span class="pill p-th">🤖</span><span class="pill p-th">🎯</span></div>
-    <p class="meta"><span class="stage">📍Mezzanine · 夾層</span>Ryan Powell（Waymo 設計負責人）</p>
-    <p class="desc">怎麼用設計做出「可讀、可被理解」的產品，AI / UX / 產品。</p>
-  </div>
-</div>
-
-<div class="slot"><div class="slot-h">4:00 – 5:00</div>
-  <div class="card must" data-m="must">
-    <p class="ttl">閉幕主題演講：完成狀態之死</p>
-    <p class="en">Closing Keynote: Death of the finished state</p>
-    <div class="tags"><span class="pill p-must">必聽</span></div>
-    <p class="meta"><span class="stage">📍Main · Hall ABC（展館層）</span>Brent David Freaney ＋ André Anjos</p>
-    <p class="desc">「東西永遠在變、沒有真正完成」的時代＋「以前要平庸很難」名人對談，收尾必聽。</p>
-  </div>
-</div>
-
-<div class="slot"><div class="slot-h">🔎 截圖沒拍到時間（到現場 app 補，都很適合你）</div>
-  <div class="card rec" data-m="rec">
-    <p class="ttl">大家都還在吃：打造 Notion 的設計系統</p>
-    <p class="en">Everyone's still eating: building Notion's design system</p>
-    <div class="tags"><span class="pill p-rec">推薦</span><span class="pill p-th">🧱</span></div>
-    <p class="meta"><span class="stage">Notion</span></p>
-    <p class="desc">Notion 怎麼打造能規模化的設計系統。</p>
-  </div>
-  <div class="card rec" data-m="rec">
-    <p class="ttl">畫布還沒死</p>
-    <p class="en">The canvas is not dead</p>
-    <div class="tags"><span class="pill p-rec">推薦</span><span class="pill p-th">🤖</span><span class="pill p-th">🎯</span></div>
-    <p class="meta"><span class="stage">Dropbox</span>Catt Small</p>
-    <p class="desc">AI 時代「畫布還沒死」，設計師的價值到底在哪——對你的轉型焦慮直接相關。</p>
-  </div>
-  <div class="card rec" data-m="rec">
-    <p class="ttl">Learning Lab：升級你的 agentic 工作流技能</p>
-    <p class="en">Upskill on skills and agentic workflows</p>
-    <div class="tags"><span class="pill p-rec">推薦</span><span class="pill p-th">🤖</span><span class="pill p-th">🛠️</span></div>
-    <p class="meta"><span class="stage">📍Learning Labs · Hall F（展館層）</span>Figma</p>
-    <p class="desc">動手場，升級你操作 AI 代理（agentic）工作流的技能。</p>
-  </div>
-</div>
-
-</div>
-
-<footer>為 Eva 整理 · Config 2026 · 時間以現場 Figma app 為準</footer>
+<footer>為 Eva 整理 · Config 2026 · 時間/場館以現場 Figma app 為準</footer>
 
 <script>
-  var tabs=document.querySelectorAll('.tab');
-  var days=document.querySelectorAll('.day');
-  tabs.forEach(function(t){t.onclick=function(){
-    tabs.forEach(function(x){x.classList.remove('on')});
-    days.forEach(function(x){x.classList.remove('on')});
-    t.classList.add('on');
-    document.getElementById(t.dataset.day).classList.add('on');
-    window.scrollTo(0,0);
-  }});
+const STAGES={
+ main:{en:'Main Stage',hall:'Hall ABC',zh:'展館層'},
+ maker:{en:'Maker Stage',hall:'Hall F',zh:'展館層'},
+ lab:{en:'Learning Labs',hall:'Hall F',zh:'展館層'},
+ lv2:{en:'Level 2 Stage',hall:'Level 2',zh:'二樓'},
+ mez:{en:'Mezzanine Stage',hall:'Mezzanine Level',zh:'夾層'},
+ comm:{en:'Community Stage',hall:'Config Commons',zh:'社群區'}
+};
+const THEMES={pm:'🎯PM',ai:'🤖AI',ds:'🧱設計系統',vis:'🎨視覺',rs:'🔍研究',build:'🛠️實作'};
 
-  var flts=document.querySelectorAll('.flt');
-  flts.forEach(function(f){f.onclick=function(){
-    flts.forEach(function(x){x.classList.remove('on')});
-    f.classList.add('on');
-    var mode=f.dataset.f;
-    document.querySelectorAll('.card').forEach(function(c){
-      var m=c.dataset.m;
-      var show = mode==='all' || (mode==='must'&&m==='must') || (mode==='rec'&&(m==='must'||m==='rec'));
-      c.classList.toggle('hidden',!show);
-    });
-    // hide empty slots
-    document.querySelectorAll('.slot').forEach(function(s){
-      var vis=s.querySelectorAll('.card:not(.hidden)').length;
-      s.style.display = vis? '':'none';
-    });
-  }});
+// d:day(1/2) slot:group label s/e:minutes(24h) st:stage code
+const DATA=[
+// ===== DAY 1 =====
+{id:'d1-1',d:1,slot:'9:00 – 10:20',time:'9:00–10:20',s:540,e:620,zh:'開幕主題演講：Figma 產品發表',en:'Opening Keynote: Figma product launch',sp:'Dylan Field（Figma 共同創辦人/CEO）',st:'main',mark:'must',th:[],desc:'全年最大場。一次公布今年所有新產品與 AI 功能，後面幾乎每一場都建立在這上面。'},
+{id:'d1-2',d:1,slot:'10:35 – 10:55',time:'10:35–10:55',s:635,e:655,zh:'規則即藝術：與 AI 共創',en:'The rules are the art: creating with AI',sp:'Holly Herndon（音樂藝術家）',st:'main',mark:'rec',th:['ai','vis'],desc:'把 AI 當創作素材、規則本身就是藝術，啟發你「跟 AI 共創而非被取代」。'},
+{id:'d1-3',d:1,slot:'11:00 – 12:10',time:'11:10–12:10',s:670,e:730,zh:'Figma Deep Dive（新功能實作）',en:'Figma deep dive',sp:'Daniela Muntyan 等（Figma）',st:'main',mark:'rec',th:['build'],desc:'開幕新功能的深入動手演示，最接近 workshop，看完馬上會用。'},
+{id:'d1-4',d:1,slot:'11:00 – 12:10',time:'11:00–11:45',s:660,e:705,zh:'Learning Lab：設計到開發的工作流',en:'design to development workflows',sp:'Amy Lima・Riccardo Erra（Figma）',st:'lab',mark:'rec',th:['ai','build'],desc:'動手場，教設計如何順暢交付給工程——PM 必懂的協作環節。'},
+{id:'d1-5',d:1,slot:'11:00 – 12:10',time:'11:10–11:30',s:670,e:690,zh:'Ready for the world',en:'Ready for the world',sp:'Vicki Tan（設計師/作家）',st:'mez',mark:'none',th:['vis'],desc:'讓作品「準備好面對世界」，偏心態與敘事。'},
+{id:'d1-6',d:1,slot:'11:00 – 12:10',time:'11:10–11:30',s:670,e:690,zh:'串接 Google Workspace 與 Figma',en:'From kickoff to canvas',sp:'Google',st:'maker',mark:'none',th:['ai'],desc:'怎麼把 Google Workspace 跟 Figma 串起來，從啟動到畫布。'},
+{id:'d1-7',d:1,slot:'11:50 – 12:10',time:'11:50–12:10',s:710,e:730,zh:'為 AI 產品打造內容系統',en:'content systems for AI product workflows',sp:'Ditto 共同創辦人',st:'maker',mark:'rec',th:['ai','pm'],desc:'怎麼為 AI 產品建立結構化的內容系統，PM 視角很有用。'},
+{id:'d1-8',d:1,slot:'11:50 – 12:10',time:'11:50–12:10',s:710,e:730,zh:'Figma 遇上硬體：為實體世界做原型',en:'Figma meets hardware',sp:'Electrolux',st:'lv2',mark:'none',th:['ds'],desc:'家電團隊示範用 Figma 為實體產品做原型。'},
+{id:'d1-9',d:1,slot:'11:50 – 12:10',time:'11:50–12:10',s:710,e:730,zh:'刻意不同步：行動勝出後的桌面設計',en:'Out of sync, on purpose',sp:'Spotify',st:'mez',mark:'none',th:['vis'],desc:'在行動優先時代，反而刻意把桌面設計做好的思考。'},
+{id:'d1-10',d:1,slot:'12:00 – 12:45',time:'12:00–12:45',s:720,e:765,zh:'Learning Lab：用 Figma Make 的各種玩法',en:'the many ways to make with Figma Make',sp:'Figma',st:'lab',mark:'rec',th:['ai','build'],desc:'動手玩 Figma Make（用 AI/prompt 直接生成設計），AI 提效核心。⚠️ 與下午 PM 連發衝堂。'},
+{id:'d1-11',d:1,slot:'12:30 – 12:50',time:'12:30–12:50',s:750,e:770,zh:'當導演：舞台工藝如何啟發產品工藝',en:'Be the director',sp:'Kim Beverett（OpenAI PM）',st:'lv2',mark:'rec',th:['pm'],desc:'OpenAI PM 用「導演/舞台」比喻產品打磨，怎麼指揮產品的節奏與細節。'},
+{id:'d1-12',d:1,slot:'12:30 – 12:50',time:'12:30–12:50',s:750,e:770,zh:'用 Dscout AI 從概念到有信心',en:'From concept to confidence with Dscout AI',sp:'Dscout',st:'maker',mark:'none',th:['rs','ai'],desc:'用 Dscout AI 做使用者研究，從概念到有信心上線。'},
+{id:'d1-13',d:1,slot:'12:50 – 1:15',time:'12:50–1:10',s:770,e:790,zh:'Skill issue：為 PM 打造一套作業系統',en:'how we built an OS for PMs at Figma',sp:'Jinen Kamdar・Lawrence Luk（Figma）',st:'lv2',mark:'must',th:['pm','ai'],desc:'Figma 內部怎麼幫 PM 建流程＋AI 工具的作業系統——你轉 PM 最直接的範本。'},
+{id:'d1-14',d:1,slot:'12:50 – 1:15',time:'12:55–1:15',s:775,e:795,zh:'設計什麼都能做的產品',en:'Designing the product that can do anything',sp:'Brian Ringley（Boston Dynamics）',st:'mez',mark:'none',th:['pm'],desc:'波士頓動力的 PM 談怎麼設計「什麼都能做」的機器人產品。'},
+{id:'d1-15',d:1,slot:'1:10 – 1:40',time:'1:10–1:40',s:790,e:820,zh:'Figma Deep Dive（含 AI Agents 負責人）',en:'Figma deep dive',sp:'Tammy Taabassum・Rodrigo Davies（Figma）',st:'main',mark:'rec',th:['ai','build'],desc:'含 Figma AI Agents 產品負責人，看 AI agent 怎麼進到設計流程。'},
+{id:'d1-16',d:1,slot:'1:50 – 2:45',time:'1:50–2:10',s:830,e:850,zh:'把 AI 規模化導入創意作業',en:'Hacking AI for creative operations at scale',sp:'Rory Flynn（Systematiq AI）',st:'maker',mark:'rec',th:['ai'],desc:'怎麼把 AI 規模化導入創意/設計的日常作業，提效實戰。'},
+{id:'d1-17',d:1,slot:'1:50 – 2:45',time:'2:00–2:45',s:840,e:885,zh:'Learning Lab：用 AI 解鎖速度與視覺表達',en:'unlocking speed and visual expression',sp:'Hugo Raymond・Mallory Dean（Figma）',st:'lab',mark:'rec',th:['vis','ai','build'],desc:'動手場，用 AI 提升速度＋視覺表現力，正中你的視覺強項。'},
+{id:'d1-18',d:1,slot:'2:30 – 2:55',time:'2:30–2:50',s:870,e:890,zh:'結構化思考如何給你的 AI 超能力',en:'How structured thinking gives your AI superpowers',sp:'Carla Pescio Canale（Atlassian 設計 AI 負責人）',st:'maker',mark:'rec',th:['ai','pm'],desc:'用結構化思考讓你指揮 AI 更強，AI＋PM 思維。'},
+{id:'d1-19',d:1,slot:'2:30 – 2:55',time:'2:35–2:55',s:875,e:895,zh:'後設認知設計迴圈',en:'The metacognitive design loop',sp:'Epsilon',st:'lv2',mark:'none',th:['ds','ai'],desc:'用後設認知設計迴圈，結合設計系統與 AI。'},
+{id:'d1-20',d:1,slot:'2:55 – 3:15',time:'2:55–3:15',s:895,e:915,zh:'你的最佳實踐都鎖在腦裡，AI 根本不知道',en:'Your best practices are trapped in your head',sp:'Harald Kirschner（Microsoft 首席 PM）',st:'lv2',mark:'rec',th:['ai','pm'],desc:'怎麼把腦中的隱性經驗變成 AI 能用的東西，PM＋AI 提效。'},
+{id:'d1-21',d:1,slot:'4:00 – 5:00',time:'4:00–5:00',s:960,e:1020,zh:'閉幕主題演講',en:'Closing Keynote',sp:'Patrick Flaherty（Microsoft）＋ Tommy Geoco・Catt Small 等',st:'main',mark:'must',th:[],desc:'雙講：把真實世界動態變成設計（動效）＋「2026 年做產品是什麼感覺」名人對談。'},
+// ===== DAY 2 =====
+{id:'d2-1',d:2,slot:'10:15 – 10:40',time:'10:15–10:35',s:615,e:635,zh:'Figma Deep Dive',en:'Figma deep dive',sp:'Elle Sheer 等（Figma）',st:'main',mark:'rec',th:['build'],desc:'第二天的新功能深入演示。'},
+{id:'d2-2',d:2,slot:'10:15 – 10:40',time:'10:15–10:35',s:615,e:635,zh:'在「10 倍工程師」時代做設計',en:'Designing in the age of the 10x engineer',sp:'Andy Zhang（Google 設計工程主管）',st:'maker',mark:'rec',th:['ai','pm'],desc:'當工程師被 AI 放大 10 倍，設計師怎麼自處與提效。'},
+{id:'d2-3',d:2,slot:'10:15 – 10:40',time:'10:20–10:40',s:620,e:640,zh:'十年每日速寫',en:'10 years of daily sketching',sp:'Zach Lieberman（MIT Media Lab）',st:'mez',mark:'none',th:['vis'],desc:'藝術家分享十年每日速寫的創作堅持，純視覺靈感。'},
+{id:'d2-4',d:2,slot:'10:30 – 10:50',time:'10:30–10:50',s:630,e:650,zh:'介面裡看不見的機制',en:'The invisible mechanisms in your interfaces',sp:'Johannes Mutter',st:'lv2',mark:'none',th:['vis','rs'],desc:'介面裡那些看不見、但決定體驗好壞的互動細節。'},
+{id:'d2-5',d:2,slot:'10:50 – 11:10',time:'10:50–11:10',s:650,e:670,zh:'用設計駕馭高密度',en:'Dense by design',sp:'Matthew Ström-Awn（mu.design）',st:'lv2',mark:'rec',th:['vis'],desc:'怎麼設計資訊密度高卻仍清楚好用的介面——對 iGaming 高密度 UI 特別有用。'},
+{id:'d2-6',d:2,slot:'10:50 – 11:10',time:'10:50–11:10',s:650,e:670,zh:'把即時使用者洞察整進設計流程',en:'Building real-time user insights into your workflow',sp:'HeyMarvin',st:'maker',mark:'none',th:['rs'],desc:'把即時的使用者研究洞察接進日常設計流程。'},
+{id:'d2-7',d:2,slot:'11:10 – 11:45',time:'11:10–11:30',s:670,e:690,zh:'Instagram 使用者名稱：小修正變成身份危機',en:'Usernames on Instagram',sp:'Rose McManus（Instagram/Meta 內容設計）',st:'lv2',mark:'none',th:['vis'],desc:'一個小文案/設計修正怎麼演變成身份認同議題的內容設計案例。'},
+{id:'d2-8',d:2,slot:'11:10 – 11:45',time:'11:25–11:45',s:685,e:705,zh:'AI 會顛覆你的流程——而且變更好',en:'AI will upend your process—for the better',sp:'Justin Meyer（Bitovi）',st:'maker',mark:'rec',th:['ai'],desc:'AI 會打掉重練你的工作流程，但結果是變好——務實觀點。'},
+{id:'d2-9',d:2,slot:'11:30 – 12:15',time:'11:30–12:15',s:690,e:735,zh:'Learning Lab：用 Figma Draw 表達自己',en:'express yourself with Figma Draw',sp:'Figma',st:'lab',mark:'rec',th:['vis','build'],desc:'動手場，用 Figma Draw 自由創作，發揮你的視覺強項。'},
+{id:'d2-10',d:2,slot:'12:15 – 1:00',time:'12:15–1:00',s:735,e:780,zh:'Figma Deep Dive：Weave 工作流揭密',en:'inside the Weave workflow',sp:'Gal Shaviv・Ron Baranov（Figma）',st:'main',mark:'rec',th:['ai','build'],desc:'深入 Weave（Figma 的 AI 工作流），AI 提效重點。'},
+{id:'d2-11',d:2,slot:'12:15 – 1:00',time:'12:25–12:45',s:745,e:765,zh:'現代電影裡的介面設計工藝',en:'The hidden craft of interface design in modern film',sp:'Jayse Hansen',st:'mez',mark:'rec',th:['vis'],desc:'好萊塢科幻電影裡那些炫炮介面怎麼設計的，純視覺享受＋靈感。'},
+{id:'d2-12',d:2,slot:'1:10 – 1:40',time:'1:10–1:30',s:790,e:810,zh:'為 AI 時代準備好 Rocket',en:'Preparing Rocket for the AI era',sp:'Rocket',st:'lv2',mark:'rec',th:['ds','ai'],desc:'金融品牌怎麼把設計系統整理成 AI 時代可用（設計系統×AI）。'},
+{id:'d2-13',d:2,slot:'1:10 – 1:40',time:'1:20–1:40',s:800,e:820,zh:'在 AI 世界裡有信心地設計',en:'Designing with confidence in an AI-powered world',sp:'UserTesting',st:'maker',mark:'rec',th:['rs','ai'],desc:'在 AI 世界裡靠研究做出有信心的設計決策。'},
+{id:'d2-14',d:2,slot:'1:30 – 1:50',time:'1:30–1:50',s:810,e:830,zh:'為「被讀懂」而設計：做出 AI 真的能用的設計系統',en:'Designed to be read: making a system AI can actually use',sp:'Harvey Whiting（Meta）',st:'lv2',mark:'must',th:['ds','ai'],desc:'怎麼做出 AI 真的讀得懂的設計系統——把你的視覺強項接上 AI 的關鍵橋樑。'},
+{id:'d2-15',d:2,slot:'2:00 – 2:45',time:'2:00–3:00',s:840,e:900,zh:'Learning Lab：打造你的第一個 Weave 工作流',en:'build your first Weave workflow',sp:'Moran Dankner・Ken Vreman（Figma）',st:'lab',mark:'rec',th:['ai','build'],desc:'動手場，親手建你第一個 Weave（AI 工作流），最實用的 AI 提效實作。'},
+{id:'d2-16',d:2,slot:'2:00 – 2:45',time:'2:05–2:25',s:845,e:865,zh:'掌握迴圈：用 AI evals 取勝',en:'Own the loop: how designers and researchers win with AI evals',sp:'Setor Zilevu（Figma 研究員）',st:'mez',mark:'rec',th:['rs','ai'],desc:'設計師/研究員怎麼用 AI 評測（evals）掌握主導權。'},
+{id:'d2-17',d:2,slot:'2:00 – 2:45',time:'2:25–2:45',s:865,e:885,zh:'為未來的 app 設計',en:'Design for the future of apps',sp:'Craig Labenz（Google）',st:'mez',mark:'rec',th:['ai'],desc:'為「未來的 app」設計，AI/UX/開發的交界。'},
+{id:'d2-18',d:2,slot:'2:55 – 3:25',time:'2:55–3:15',s:895,e:915,zh:'設計系統無政府主義',en:'Design systems anarchy',sp:'Lauren LoPrete（Mercury 設計基礎負責人）',st:'lv2',mark:'rec',th:['ds','ai'],desc:'打破設計系統的死板規則，AI 時代的設計系統新解。'},
+{id:'d2-19',d:2,slot:'2:55 – 3:25',time:'3:05–3:25',s:905,e:925,zh:'為可讀性而設計',en:'Legibility by design',sp:'Ryan Powell（Waymo 設計負責人）',st:'mez',mark:'rec',th:['ai','pm'],desc:'怎麼用設計做出可讀、可被理解的產品，AI/UX/產品。'},
+{id:'d2-20',d:2,slot:'4:00 – 5:00',time:'4:00–5:00',s:960,e:1020,zh:'閉幕主題演講：完成狀態之死',en:'Closing Keynote: Death of the finished state',sp:'Brent David Freaney ＋ André Anjos',st:'main',mark:'must',th:[],desc:'「東西永遠在變、沒有真正完成」的時代＋「以前要平庸很難」名人對談。'},
+// extras (no time)
+{id:'d2-e1',d:2,slot:'🔎 時間待定（現場 app 補）',time:'時間待定',s:null,e:null,zh:'大家都還在吃：打造 Notion 的設計系統',en:"Everyone's still eating: building Notion's design system",sp:'Notion',st:null,mark:'rec',th:['ds'],desc:'Notion 怎麼打造能規模化的設計系統。'},
+{id:'d2-e2',d:2,slot:'🔎 時間待定（現場 app 補）',time:'時間待定',s:null,e:null,zh:'畫布還沒死',en:'The canvas is not dead',sp:'Catt Small（Dropbox）',st:null,mark:'rec',th:['ai','pm'],desc:'AI 時代「畫布還沒死」，設計師的價值到底在哪——對你的轉型焦慮直接相關。'},
+{id:'d2-e3',d:2,slot:'🔎 時間待定（現場 app 補）',time:'時間待定',s:null,e:null,zh:'Learning Lab：升級你的 agentic 工作流技能',en:'Upskill on skills and agentic workflows',sp:'Figma',st:'lab',mark:'rec',th:['ai','build'],desc:'動手場，升級你操作 AI 代理（agentic）工作流的技能。'}
+];
+
+// ---------- helpers ----------
+const KEY='config2026_plan';
+function getSel(){try{return JSON.parse(localStorage.getItem(KEY))||[]}catch(e){return[]}}
+function setSel(a){localStorage.setItem(KEY,JSON.stringify(a))}
+function isSel(id){return getSel().indexOf(id)>=0}
+function toggle(id){let a=getSel();const i=a.indexOf(id);if(i>=0)a.splice(i,1);else a.push(id);setSel(a);refresh();}
+
+function venueHTML(d){
+  if(!d.st)return '<span class="venue">📍 場館以現場 app 為準</span>';
+  const v=STAGES[d.st];
+  return '<span class="venue">📍 '+v.en+' · '+v.hall+'｜'+v.zh+'</span>';
+}
+function tagsHTML(d){
+  let h='';
+  if(d.mark==='must')h+='<span class="pill p-must">必聽</span>';
+  else if(d.mark==='rec')h+='<span class="pill p-rec">推薦</span>';
+  d.th.forEach(t=>{h+='<span class="pill p-th">'+THEMES[t]+'</span>'});
+  return h;
+}
+function cardHTML(d){
+  return '<div class="card '+d.mark+'" data-id="'+d.id+'" data-mark="'+d.mark+'" data-th="'+d.th.join(' ')+'">'
+    +'<button class="add'+(isSel(d.id)?' on':'')+'" data-id="'+d.id+'">'+(isSel(d.id)?'✓':'+')+'</button>'
+    +'<p class="ttl">'+d.zh+'</p>'
+    +'<p class="en">'+d.en+'</p>'
+    +'<div class="tags">'+tagsHTML(d)+'</div>'
+    +'<p class="meta">🕐 '+d.time+'　'+d.sp+'</p>'
+    +venueHTML(d)
+    +'<p class="desc">'+d.desc+'</p></div>';
+}
+
+// ---------- render browse days ----------
+function renderDay(dayNum){
+  const box=document.getElementById('d'+dayNum);
+  const items=DATA.filter(x=>x.d===dayNum);
+  let html='',lastSlot=null,buf=[];
+  function flush(){
+    if(!buf.length)return;
+    const multi=buf.length>1?'<span class="multi">⚖️ 同時段 '+buf.length+' 場</span>':'';
+    html+='<div class="slot"><div class="slot-h">'+lastSlot+multi+'</div>'+buf.map(cardHTML).join('')+'</div>';
+    buf=[];
+  }
+  items.forEach(d=>{if(d.slot!==lastSlot){flush();lastSlot=d.slot;}buf.push(d);});
+  flush();
+  box.innerHTML=html;
+}
+
+// ---------- render my plan ----------
+function renderMine(){
+  const box=document.getElementById('mine');
+  const items=DATA.filter(d=>isSel(d.id)).slice().sort((a,b)=>a.d-b.d||((a.s==null?9999:a.s)-(b.s==null?9999:b.s)));
+  document.getElementById('cnt').textContent=items.length;
+  if(!items.length){box.innerHTML='<div class="empty">還沒選任何場次 🗓️<br>到「6/24 / 6/25」分頁，點每張卡片右上的 ＋<br>加入後會出現在這裡，並自動幫你檢查時間衝突。</div>';return;}
+  // conflicts
+  const conf=new Set();const pairs=[];
+  for(let i=0;i<items.length;i++)for(let j=i+1;j<items.length;j++){
+    const a=items[i],b=items[j];
+    if(a.d===b.d&&a.s!=null&&b.s!=null&&a.s<b.e&&b.s<a.e){conf.add(a.id);conf.add(b.id);pairs.push([a,b]);}
+  }
+  let html='<div class="toolbar"><span style="color:var(--sub);font-size:13px">已選 '+items.length+' 場</span><button class="clr" id="clrbtn">清空全部</button></div>';
+  if(pairs.length){
+    html+='<div class="banner">⚠️ <b>有 '+pairs.length+' 組時間衝突</b>，請二選一：<br>'
+      +pairs.map(p=>'• 6/'+(p[0].d===1?'24':'25')+' '+p[0].time+'「'+p[0].zh+'」 ↔ '+p[1].time+'「'+p[1].zh+'」').join('<br>')+'</div>';
+  }
+  let lastDay=null;
+  items.forEach(d=>{
+    if(d.d!==lastDay){lastDay=d.d;html+='<div class="daylbl">'+(d.d===1?'6/24 週三':'6/25 週四')+'</div>';}
+    const cf=conf.has(d.id)?' conf':'';
+    html+='<div class="card '+d.mark+cf+'">'
+      +(conf.has(d.id)?'<p class="meta" style="color:var(--warn);font-weight:700">⚠️ 時間衝突</p>':'')
+      +'<p class="ttl">'+d.zh+'</p>'
+      +'<div class="tags">'+tagsHTML(d)+'</div>'
+      +'<p class="meta">🕐 '+d.time+'　'+d.sp+'</p>'
+      +venueHTML(d)
+      +'<button class="rm" data-id="'+d.id+'">✕ 移除</button></div>';
+  });
+  box.innerHTML=html;
+  document.getElementById('clrbtn').onclick=function(){if(confirm('確定清空所有已選場次？')){setSel([]);refresh();}};
+  box.querySelectorAll('.rm').forEach(b=>b.onclick=function(){toggle(this.dataset.id);});
+}
+
+// ---------- filters ----------
+let activeThemes=new Set();
+function buildThemeChips(){
+  const box=document.getElementById('themechips');
+  box.innerHTML=Object.keys(THEMES).map(k=>'<div class="chip" data-t="'+k+'">'+THEMES[k]+'</div>').join('');
+  box.querySelectorAll('.chip').forEach(c=>c.onclick=function(){
+    const t=this.dataset.t;
+    if(activeThemes.has(t)){activeThemes.delete(t);this.classList.remove('on');}
+    else{activeThemes.add(t);this.classList.add('on');}
+    applyFilters();
+  });
+}
+let markFilter='all';
+function applyFilters(){
+  document.querySelectorAll('#d1 .card, #d2 .card').forEach(c=>{
+    const m=c.dataset.mark;
+    const okMark = markFilter==='all'||(markFilter==='must'&&m==='must')||(markFilter==='rec'&&(m==='must'||m==='rec'));
+    const ths=(c.dataset.th||'').split(' ').filter(Boolean);
+    const okTheme = activeThemes.size===0||ths.some(t=>activeThemes.has(t));
+    c.classList.toggle('hidden',!(okMark&&okTheme));
+  });
+  document.querySelectorAll('#d1 .slot, #d2 .slot').forEach(s=>{
+    s.style.display = s.querySelectorAll('.card:not(.hidden)').length?'':'none';
+  });
+}
+
+// ---------- refresh all ----------
+function refresh(){
+  renderDay(1);renderDay(2);renderMine();applyFilters();
+  document.querySelectorAll('.add').forEach(b=>b.onclick=function(){toggle(this.dataset.id);});
+}
+
+// ---------- tabs ----------
+const tabs=document.querySelectorAll('.tab'),days=document.querySelectorAll('.day');
+tabs.forEach(t=>t.onclick=function(){
+  tabs.forEach(x=>x.classList.remove('on'));days.forEach(x=>x.classList.remove('on'));
+  t.classList.add('on');document.getElementById(t.dataset.day).classList.add('on');
+  document.getElementById('filterbox').style.display=(t.dataset.day==='mine')?'none':'';
+  window.scrollTo(0,0);
+});
+document.querySelectorAll('.flt').forEach(f=>f.onclick=function(){
+  document.querySelectorAll('.flt').forEach(x=>x.classList.remove('on'));
+  f.classList.add('on');markFilter=f.dataset.f;applyFilters();
+});
+
+// init
+buildThemeChips();refresh();
 </script>
 </body>
 </html>
