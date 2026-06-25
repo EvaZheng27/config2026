@@ -22,9 +22,9 @@
 
   .bar{position:sticky;top:0;z-index:20;background:#0f1115ee;backdrop-filter:blur(8px);
     border-bottom:1px solid var(--line);padding:8px 12px}
-  .tabs{display:flex;gap:8px;margin-bottom:8px}
-  .tab{flex:1;text-align:center;padding:9px 4px;border-radius:12px;background:var(--card);
-    color:var(--sub);font-weight:700;font-size:13.5px;border:1px solid var(--line);cursor:pointer}
+  .tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .tab{flex:1 1 auto;min-width:72px;text-align:center;padding:9px 4px;border-radius:12px;background:var(--card);
+    color:var(--sub);font-weight:700;font-size:13px;border:1px solid var(--line);cursor:pointer}
   .tab.on{background:var(--accent);color:#fff;border-color:var(--accent)}
   .cnt{display:inline-block;min-width:18px;padding:0 5px;background:var(--must);color:#1a1300;
     border-radius:20px;font-size:11px;margin-left:3px}
@@ -105,6 +105,7 @@
     <div class="tab" data-day="d2">6/25 週四</div>
     <div class="tab" data-day="mine">⭐我的行程<span class="cnt" id="cnt">0</span></div>
     <div class="tab" data-day="cheat">💬小抄</div>
+    <div class="tab" data-day="sop">🧭挖掘SOP</div>
   </div>
   <div id="filterbox">
     <div class="frow">
@@ -318,6 +319,64 @@
   <div class="ch-intro" style="margin-top:14px">🧠 心法：<b>你問問題＝你掌握節奏</b>，不用想「我要講什麼厲害的」。讓對方講，你點頭追問就夠了。</div>
 </div>
 
+<div class="day" id="sop">
+  <div class="ch-intro">🧭 <b>挖掘對話 SOP</b>：你的底色是「好奇」，不是焦慮。<b>真誠的好奇＝最好的交心</b>——讓對方當主角，用「交換」不是「抽取」。</div>
+
+  <div class="ch-sec">🧠 三個心法</div>
+  <div class="prod">① 把對方放在<b>專家／主角</b>位置（你只看得到自己的小角落）<br>② 用<b>真實的驚訝</b>反應（“wait, really?”）<br>③ <b>交換</b>故事，不是抽取——你也分享你那行的狀況</div>
+
+  <div class="ch-sec">① 開場（好奇式，不破題）</div>
+  <div class="ph">
+    <p class="ph-en">Honestly, the most fun part of Config for me is hearing how differently each industry and country deals with this AI wave. I'm a game designer from Taiwan — what's it like in your world?</p>
+    <p class="ph-zh">最自然：說你「著迷」各國各業怎麼面對 AI 浪潮，再把球給對方。</p>
+  </div>
+  <div class="ph">
+    <p class="ph-en">You work in ___? I'm so curious how AI is actually showing up there — I only get to see my little game-design corner.</p>
+    <p class="ph-zh">把對方的產業當亮點，自己謙稱只看得到小角落。</p>
+  </div>
+
+  <div class="ch-sec">② 核心兩問（你真正想挖的）</div>
+  <div class="ph hot">
+    <p class="ph-en">What has your company actually changed because of AI?</p>
+    <p class="ph-zh">公司面對 AI 浪潮做了什麼改變？</p>
+  </div>
+  <div class="ph hot">
+    <p class="ph-en">And you personally — has your day-to-day shifted?</p>
+    <p class="ph-zh">那你個人的工作，又有什麼改變？</p>
+  </div>
+
+  <div class="ch-sec">③ 比較追問（你的獨門武器）</div>
+  <div class="ph">
+    <p class="ph-en">Is that different from how teams in the US / Japan do it?</p>
+    <p class="ph-zh">這跟美國／日本團隊的做法不一樣嗎？</p>
+  </div>
+  <div class="ph">
+    <p class="ph-en">In Taiwan we mostly ___ — is it the same on your side?</p>
+    <p class="ph-zh">在台灣我們大多 ___，你那邊也一樣嗎？（雙向交換）</p>
+  </div>
+
+  <div class="ch-sec">④ 漏斗追問（沒鑽到底不換題）</div>
+  <div class="prod">問完任何答案，往下鑽 2–3 層：<br>“Can you give me a concrete example?”（能舉個例嗎？）<br>“Why do you think that is?”（你覺得為什麼？）<br>“How did your team react?”（你們團隊怎麼反應？）</div>
+
+  <div class="ch-sec">⑤ 敏感題：裁員（後段、有信任再問）</div>
+  <div class="ph">
+    <p class="ph-en">With all this AI, is anyone on your team worried about their role? What's the mood like?</p>
+    <p class="ph-zh">問「氛圍」不問個人——大家會不會擔心飯碗？團隊氣氛如何？</p>
+  </div>
+  <div class="ph">
+    <p class="ph-en">Do you think AI is replacing design, or just changing it?</p>
+    <p class="ph-zh">你覺得 AI 是取代設計，還是只是改變它？</p>
+  </div>
+
+  <div class="ch-sec">⑥ 收尾：抓「那一件事」</div>
+  <div class="ph hot">
+    <p class="ph-en">If there's one thing you'd want me to remember about AI and your work, what is it?</p>
+    <p class="ph-zh">逼出一句精華，又是漂亮的結束。</p>
+  </div>
+
+  <div class="ch-intro" style="margin-top:14px">🔁 <b>流程公式</b>：暖場／共同身份 → 掏一點好奇 → 對方開講 → 比較＋漏斗追問 → 敏感題（後段）→ 收 the one thing</div>
+</div>
+
 <footer>為 Eva 整理 · Config 2026 · 時間/場館以現場 Figma app 為準</footer>
 
 <script>
@@ -500,7 +559,7 @@ const tabs=document.querySelectorAll('.tab'),days=document.querySelectorAll('.da
 tabs.forEach(t=>t.onclick=function(){
   tabs.forEach(x=>x.classList.remove('on'));days.forEach(x=>x.classList.remove('on'));
   t.classList.add('on');document.getElementById(t.dataset.day).classList.add('on');
-  document.getElementById('filterbox').style.display=(t.dataset.day==='mine'||t.dataset.day==='cheat')?'none':'';
+  document.getElementById('filterbox').style.display=(t.dataset.day==='mine'||t.dataset.day==='cheat'||t.dataset.day==='sop')?'none':'';
   window.scrollTo(0,0);
 });
 document.querySelectorAll('.flt').forEach(f=>f.onclick=function(){
